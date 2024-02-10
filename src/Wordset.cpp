@@ -16,4 +16,5 @@ size_t polynomialHashFunction(const std::string &string, unsigned int base,
     return hashValue;
 }
 
+
 }  // namespace shindler::ics46::project3

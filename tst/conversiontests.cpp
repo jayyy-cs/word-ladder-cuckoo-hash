@@ -92,4 +92,33 @@ TEST_CASE("Conversion:Ant->Eat:ExpectSolution",
     REQUIRE(validConversion(conversionPath, "ant", "eat", istream2));
 }
 
+TEST_CASE("Conversion:Ant->Able",
+          "[Sample][Conversion][NoSolution]") {
+    const static size_t BASE_CAPACITY = 11;
+    proj3::WordSet words{BASE_CAPACITY};
+    std::ifstream istream{"words.txt"};
+    proj3::loadWordsIntoTable(istream, words);
+
+    auto conversionPath = proj3::convert("ant", "able", words);
+
+    std::ifstream istream2{"words.txt"};
+
+    REQUIRE(conversionPath.empty());
+    REQUIRE_FALSE(validConversion(conversionPath, "ant", "able", istream2));
+}
+
+TEST_CASE("Conversion:Ant->Ant",
+          "[Sample][Conversion][HasSolution]") {
+    const static size_t BASE_CAPACITY = 11;
+    proj3::WordSet words{BASE_CAPACITY};
+    std::ifstream istream{"words.txt"};
+    proj3::loadWordsIntoTable(istream, words);
+
+    auto conversionPath = proj3::convert("ant", "ant", words);
+
+    std::ifstream istream2{"words.txt"};
+
+    REQUIRE(conversionPath.size() == 1);
+    REQUIRE(validConversion(conversionPath, "ant", "ant", istream2));
+}
 }  // namespace
